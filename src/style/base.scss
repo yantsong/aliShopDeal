@@ -21,21 +21,25 @@ a:-webkit-any-link{
   justify-content: center;
   align-items: center;
 }
+// 列居中
 [fccm] {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
+//靠左 flex center start
 [fcs] {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
+// shadow样式
 [bsd] {
   box-shadow: 0px 8px 35px 0px rgba(177, 177, 177, 0.39);
   border-radius: 10px;
 }
+//btn style
 [bts] {
   border-radius: 22px;
   background-color: #ffb643;

@@ -5,19 +5,19 @@
      <i class='iconfont icon-piaoliusanicon-geren-'></i>
      <span>首页</span>
    </router-link>
-   <router-link to="/xx"  class="mfooter-tabs">
+   <router-link to="/tasks"  class="mfooter-tabs">
      <i class='iconfont icon-piaoliusanicon-geren-'></i>
      <span>已接任务</span>
    </router-link>
-   <router-link to="/cc"  class="mfooter-tabs">
+   <router-link to="/message"  class="mfooter-tabs">
      <i class='iconfont icon-piaoliusanicon-geren-'></i>
      <span>消息</span>
    </router-link>
-   <router-link to="/aa"  class="mfooter-tabs">
+   <router-link to="/apprentice"  class="mfooter-tabs">
      <i class='iconfont icon-piaoliusanicon-geren-'></i>
      <span>徒弟</span>
    </router-link>
-   <router-link to="/qq"  class="mfooter-tabs">
+   <router-link to="/center"  class="mfooter-tabs">
      <i class='iconfont icon-piaoliusanicon-geren-'></i>
      <span>个人中心</span>
    </router-link>

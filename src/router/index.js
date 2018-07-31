@@ -15,6 +15,26 @@ export default new Router({
       path: '/index',
       name: 'index',
       component: Index
+    },
+    {
+      path: '/center',
+      name: 'Center',
+      component: () => import('@/views/center/center.vue')
+    },
+    {
+      path: '/message',
+      name: 'Message',
+      component: () => import('@/views/message/message.vue')
+    },
+    {
+      path: '/tasks',
+      name: 'Tasks',
+      component: () => import('@/views/tasks/tasks.vue')
+    },
+    {
+      path: '/apprentice',
+      name: 'Apprentice',
+      component: () => import('@/views/apprentice/apprentice.vue')
     }
   ]
 })
