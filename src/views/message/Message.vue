@@ -1,15 +1,24 @@
 <!-- messages -->
 <template>
- <div></div>
+ <div class="message">
+   <MessageItem v-for="item in messages" :key="item.messageId" :message="item">
+   </MessageItem>
+ </div>
 </template>
 
 <script>
+import MessageItem from "./components/MessageItem";
+import api from "@/api/message";
 export default {
   data() {
-    return {};
+    return {
+      messages: []
+    };
   },
 
-  created() {},
+  created() {
+    api.getmessages().then(res => (this.messages = res.data.messages));
+  },
 
   mounted() {},
 
@@ -17,8 +26,13 @@ export default {
 
   computed: {},
 
-  components: {}
+  components: {
+    MessageItem
+  }
 };
 </script>
 <style lang='scss' scoped>
+.message {
+  padding: 0 30px 0 36px;
+}
 </style>

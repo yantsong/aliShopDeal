@@ -5,19 +5,19 @@
      <div class="index-announcement" fcs bsd>
          <i class="iconfont icon-laba"></i>
          <span>公告</span>
-         <h2></h2>
+         <h2>{{info.announcement}}</h2>
      </div>
      <div class="index-myinfo" bsd>
          <div class="myinfo" fcs>
              <img src="../assets/avt.png" alt="" class="avater">
              <ul>
-                 <li>UID:xxx</li>
-                 <li>您的师傅:xxx</li>
-                 <li>旺旺号:XXX</li>
+                 <li>UID:{{info.user.UUID}}</li>
+                 <li>您的师傅:{{info.user.teacher}}</li>
+                 <li>旺旺号:{{info.user.wangwang}}</li>
              </ul>
          </div>
          <div class="myintegral">
-             <p>我的积分:xxx</p>
+             <p>我的积分:{{info.user.intergarl}}</p>
              <span bts>提现</span>
          </div>
      </div>
@@ -25,17 +25,17 @@
          <li bsd fccm>
              <i class='iconfont icon-jinri'></i>
              <span>今日已接</span>
-             <span>x/x</span>
+             <span>{{info.order.today.compelet}}/{{info.order.today.total}}</span>
          </li>
          <li bsd fccm>
              <i class='iconfont icon-jinri'></i>
              <span>今日已接</span>
-             <span>x/x</span>
+             <span>{{info.order.day7.compelet}}/{{info.order.day7.total}}</span>
          </li>
          <li bsd fccm>
              <i class='iconfont icon-jinri'></i>
              <span>今日已接</span>
-             <span>x/x</span>
+             <span>{{info.order.day30.compelet}}/{{info.order.day30.total}}</span>
          </li>
      </ul>
      <div class="index-cancel" v-if="true">
@@ -50,16 +50,40 @@
 </template>
 
 <script>
-import MFooter from '@/components/MFooter.vue';
+import MFooter from "@/components/MFooter.vue";
+import api from "@/api/index";
 export default {
   data() {
-    return {};
+    return {
+      info: {
+        user: {},
+        order: {
+          today: {
+            total: 0,
+            compelet: 0
+          },
+          day7: {
+            total: 0,
+            compelet: 0
+          },
+          day30: {
+            total: 0,
+            compelet: 0
+          }
+        }
+      }
+    };
   },
 
   components: {
     MFooter
   },
-
+  created() {
+    api.getIndexInfo(0).then(res => {
+      this.info = { ...res.data };
+      this.info.user = { ...res.data.user };
+    });
+  },
   computed: {},
 
   mounted() {},
@@ -130,7 +154,7 @@ export default {
       background-color: #fff;
       i {
         font-size: 48px;
-        color:#ffb643;
+        color: #ffb643;
       }
     }
   }
@@ -142,18 +166,18 @@ export default {
       width: 100%;
     }
   }
-  .index-cancel{
-      text-align: center;
-      p{
-          width: 620px;
-          line-height: 72px;
-          border-radius: 35px;
-          margin: 56px auto 70px;
-      }
-      img{
-          width: 211px;
-          height: 174px;
-      }
+  .index-cancel {
+    text-align: center;
+    p {
+      width: 620px;
+      line-height: 72px;
+      border-radius: 35px;
+      margin: 56px auto 70px;
+    }
+    img {
+      width: 211px;
+      height: 174px;
+    }
   }
 }
 </style>
