@@ -6,8 +6,7 @@ Vue.use(Router)
 
 export default new Router({
   mode: 'history',
-  routes: [
-    {
+  routes: [{
       path: '/',
       redirect: '/index'
     },
@@ -24,7 +23,12 @@ export default new Router({
     {
       path: '/message',
       name: 'Message',
-      component: () => import('@/views/message/message.vue')
+      component: () => import('@/views/message/Message.vue')
+    },
+    {
+      path: '/message/:id',
+      name: 'MessageItem',
+      component: () => import('@/views/message/MessageDetail.vue')
     },
     {
       path: '/tasks',

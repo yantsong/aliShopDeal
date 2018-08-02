@@ -1,6 +1,6 @@
 <!--  -->
 <template>
- <div class="message-item">
+ <div class="message-item" @click="handClick(message.messageId)">
      <div class="message-item-time"> <span>{{message.messageTime}}</span></div>
      <div class="message-item-detail" bsd>
          <dl>
@@ -25,7 +25,11 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    handClick(id) {
+      this.$router.push(`/message/${id}`);
+    }
+  },
 
   computed: {},
 
@@ -46,8 +50,8 @@ export default {
 }
 .message-item {
   &-time {
-      text-align: center;
-      margin: 20px auto;
+    text-align: center;
+    margin: 20px auto;
     span {
       font-size: 20px;
       line-height: 30px;
@@ -74,6 +78,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     line-height: 44px;
+    margin-top:12px;
     strong {
       font-size: 26px;
     }

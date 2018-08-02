@@ -1,7 +1,7 @@
 <!-- messages -->
 <template>
  <div class="message">
-   <MessageItem v-for="item in messages" :key="item.messageId" :message="item">
+   <MessageItem v-for="item in messages" :key="item.messageId" :message="item" @click="handClick(0)">
    </MessageItem>
  </div>
 </template>
@@ -22,7 +22,8 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+  },
 
   computed: {},
 
