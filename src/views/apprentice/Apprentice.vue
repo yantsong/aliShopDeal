@@ -3,12 +3,12 @@
  <div class="apprentice">
    <ul class="apprentice-count" bsd fc>
      <li>
-       <p>任务完成总数</p>
-       <span>0</span>
+       <p>上月积分余额</p>
+       <span>{{info&&info.balance}}</span>
      </li>
      <li>
-       <p>任务完成总数</p>
-       <span>0</span>
+       <p>本月收入</p>
+       <span>{{info&&info.balance}}</span>
      </li>
    </ul>
    <div class="apprentice-tips">
@@ -17,12 +17,12 @@
    </div>
    <ul class="apprentice-count" invite bsd fc>
      <li>
-       <p>xxxxxxx</p>
+       <p>{{info&&info.invitationCode}}</p>
        <span>复制</span>
      </li>
      <li>
        <p>生成邀请码</p>
-       <span>已生成:6/40</span>
+       <span>已生成:{{info&&info.exist}}/{{info&&info.totalCode}}</span>
      </li>
    </ul>
    <ul class="apprentice-tablist" bsd >
@@ -30,8 +30,8 @@
        <span>徒弟列表</span>
        <em>></em>
      </li>
-     <li>
-       <span>徒弟列表</span>
+     <li @click="toIntegralDetail">
+       <span>积分明细</span>
        <em>></em>
      </li>
      <li>
@@ -43,18 +43,27 @@
 </template>
 
 <script>
+import api from "@/api/apprentice";
 export default {
   data() {
-    return {};
+    return {
+      info: ""
+    };
   },
-
+  created() {
+    api.getInviteInfo().then(res => (this.info = res.data));
+  },
   components: {},
 
   computed: {},
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    toIntegralDetail() {
+      this.$router.push('/integralDetail');
+    }
+  }
 };
 </script>
 <style lang='scss' scoped>
@@ -106,14 +115,14 @@ export default {
       color: #333333;
       font-size: 28px;
       border-bottom: 2px solid #eeeeee;
-      &:nth-last-of-type(1){
-        border:none;
+      &:nth-last-of-type(1) {
+        border: none;
       }
     }
     span {
       margin-left: 25px;
     }
-    em{
+    em {
       margin-right: 25px;
     }
   }
