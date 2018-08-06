@@ -36,15 +36,15 @@
      <li>
        <p>
          <i class='iconfont icon-icon-test'></i>
-         <span>提现记录</span>
+         <span>修改密码</span>
        </p>
        <em>></em>
      </li>
      <li>
-       <p>
+       <routerLink tag="p" to="/bindinfo">
          <i class='iconfont icon-icon-test'></i>
-         <span>积分明细</span>
-       </p>
+         <span>信息绑定</span>
+       </routerLink >
        <em>></em>
      </li>
    </ul>
@@ -70,7 +70,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .center {
-  ul{
+  ul {
     background-color: #fff;
     margin-bottom: 26px;
   }
@@ -81,7 +81,7 @@ export default {
     font-size: 28px;
     line-height: 48px;
     background-image: url(../../assets/bg0.png);
-    background-attachment:fixed;
+    background-attachment: fixed;
     background-size: 750px 300px;
     img {
       width: 120px;
@@ -115,20 +115,20 @@ export default {
   &-list {
     border-radius: 20px;
     padding: 0 18px 0 3px;
-    color:#333333;
-    li{
+    color: #333333;
+    li {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 84px;
-      &:nth-of-type(1){
+      &:nth-of-type(1) {
         border-bottom: 1px solid #eeeeee;
       }
-      p{
-        i{
+      p {
+        i {
           margin: 0 32px;
         }
-        span{
+        span {
           font-size: 28px;
         }
       }

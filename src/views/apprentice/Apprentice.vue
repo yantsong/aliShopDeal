@@ -13,7 +13,7 @@
    </ul>
    <div class="apprentice-tips">
      <span>一个邀请码只可邀请一个用户</span>
-     <em>历史邀请码></em>
+     <em @click="toHistoryCode">历史邀请码></em>
    </div>
    <ul class="apprentice-count" invite bsd fc>
      <li>
@@ -35,7 +35,7 @@
        <em>></em>
      </li>
      <li>
-       <span>徒弟列表</span>
+       <span @click="toList">徒弟列表</span>
        <em>></em>
      </li>
    </ul>
@@ -61,7 +61,13 @@ export default {
 
   methods: {
     toIntegralDetail() {
-      this.$router.push('/integralDetail');
+      this.$router.push("/integralDetail");
+    },
+    toHistoryCode() {
+      this.$router.push("/historyCode");
+    },
+    toList() {
+      this.$router.push("/apprenticesList");
     }
   }
 };

@@ -1,7 +1,17 @@
 <!-- integralDetail -->
 <template>
- <div>
-     <Integral-list :listsData="listsData"></Integral-list>
+ <div class="integral-detail">
+     <Integral-list @getMore='getMore'>
+       <ul >
+         <li v-for="(item,index) in listsData" :key="index">
+             <div>
+                 <p>{{item.title}}</p>
+                 <span :style="{color:item.integral>0?'green':'black'}">{{item.integral>0?`+${item.integral}`:item.integral}}</span>
+             </div>
+             <p class="time">{{item.time}}</p>
+         </li>
+     </ul>
+     </Integral-list>
  </div>
 </template>
 
@@ -16,13 +26,23 @@ export default {
   },
 
   created() {
-      console.log(11);
-    api.getIntegralDetail().then(res => (this.listsData = res.data.integralList));
+    console.log(11);
+    api
+      .getIntegralDetail()
+      .then(res => (this.listsData = res.data.integralList));
   },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    getMore() {
+      api
+        .getIntegralDetail()
+        .then(
+          res => (this.listsData = this.listsData.concat(res.data.integralList))
+        );
+    }
+  },
 
   computed: {},
 

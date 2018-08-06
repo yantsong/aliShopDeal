@@ -50,6 +50,36 @@ export default new Router({
       name: 'IntegralDetail',
       component: () =>
         import ('@/views/apprentice/IntegralDetail.vue')
+    },
+    {
+      path: '/historyCode',
+      name: 'HistoryCode',
+      component: () =>
+        import ('@/views/apprentice/HistoryCode.vue')
+    },
+    {
+      path: '/bindInfo',
+      name: 'BindInfo',
+      component: () =>
+        import ('@/views/center/bindInfo.vue')
+    },
+    {
+      path: '/changenumber',
+      name: 'Changenumber',
+      component: () =>
+        import ('@/views/center/ChangeNumber.vue')
+    },
+    {
+      path: '/bindcard',
+      name: 'BindCard',
+      component: () =>
+        import ('@/views/center/BindCard.vue')
+    },
+    {
+      path: '/apprenticesList',
+      name: 'ApprenticeList',
+      component: () =>
+        import ('@/views/apprentice/ApprenticesList.vue')
     }
   ]
 })

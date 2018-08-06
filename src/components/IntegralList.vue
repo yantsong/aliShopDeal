@@ -1,16 +1,8 @@
 <!-- templat about history and intergral -->
 <template>
  <div class="integral-list">
-     <ul slot>
-         <li v-for="(item,index) in listsData" :key="index">
-             <div>
-                 <p>{{item.title}}</p>
-                 <span :style="{color:item.integral>0?'green':'black'}">{{item.integral>0?`+${item.integral}`:item.integral}}</span>
-             </div>
-             <p class="time">{{item.time}}</p>
-         </li>
-     </ul>
-     <div class="integral-list-more" bts>
+   <slot></slot>
+     <div class="integral-list-more" bts @click="clickMore">
          加载更多
      </div>
  </div>
@@ -27,7 +19,14 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    clickMore() {
+      this.$emit("getMore");
+    },
+    clickCopy(id) {
+      this.$emit("copy", id);
+    }
+  },
 
   computed: {},
 
@@ -56,11 +55,11 @@ export default {
       }
     }
   }
-  &-more{
-      border-radius: 35px;
-      width: 620px;
-      line-height: 71px;
-      margin: 48px auto 0;
+  &-more {
+    border-radius: 35px;
+    width: 620px;
+    line-height: 71px;
+    margin: 48px auto 0;
   }
 }
 </style>
