@@ -41,10 +41,10 @@
        <em>></em>
      </li>
      <li>
-       <routerLink tag="p" to="/bindinfo">
+       <router-link tag="p" to="/bindinfo">
          <i class='iconfont icon-icon-test'></i>
          <span>信息绑定</span>
-       </routerLink >
+       </router-link >
        <em>></em>
      </li>
    </ul>

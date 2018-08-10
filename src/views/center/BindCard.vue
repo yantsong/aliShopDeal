@@ -13,7 +13,14 @@
              </dl>
              <dl>
                  <dt>持卡人姓名</dt>
-                 <dd><input type="text" placeholder="请填写姓名"></dd>
+                 <dd>
+                  <select name="none" id="select" value="2222">
+                    <option value="111">请填写开户银行</option>
+                    <option value="2222">2222</option>
+                    <option value="3333">3333</option>
+                    <option value="4444">4444</option>
+                  </select>
+                </dd>
              </dl>
              <dl>
                  <dt>持卡人姓名</dt>
@@ -29,11 +36,36 @@
      </div>
  </div>
 </template>
-
 <script>
+/* eslint-disable no-unused-vars*/
+import { Select, Option } from "element-ui";
 export default {
   data() {
-    return {};
+    return {
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕"
+        },
+        {
+          value: "选项2",
+          label: "双皮奶"
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎"
+        },
+        {
+          value: "选项4",
+          label: "龙须面"
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭"
+        }
+      ],
+      value: ""
+    };
   },
 
   created() {},
@@ -47,7 +79,19 @@ export default {
   components: {}
 };
 </script>
+
 <style lang='scss' scoped>
+#select {
+  background-color: #fff;
+  width: 100%;
+  border-radius: 8px;
+  line-height: 60px;
+  height: 60px;
+  text-indent: 26px;
+  border: 1px solid #d2d2d2;
+  outline: none;
+  color: #666;
+}
 .bindcard {
   &-binded {
     width: 714px;
@@ -80,7 +124,7 @@ export default {
           input {
             width: 100%;
             border-radius: 8px;
-            line-height: 60px;
+            line-height: 60px !important;
             text-indent: 26px;
             border: 1px solid #d2d2d2;
             outline: none;
