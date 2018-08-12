@@ -8,7 +8,7 @@ export default new Router({
   mode: 'history',
   routes: [{
       path: '/',
-      redirect: '/index'
+      redirect: '/login'
     },
     {
       path: '/index',
@@ -20,6 +20,18 @@ export default new Router({
       name: 'Center',
       component: () =>
         import ('@/views/center/center.vue')
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () =>
+        import ('@/views/Login.vue')
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: () =>
+        import ('@/views/Register.vue')
     },
     {
       path: '/message',
