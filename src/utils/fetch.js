@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BASEURL = 'https://easy-mock.com/mock/5b601e87e5570610098cc864'
+const BASEURL = 'http://47.75.210.100/sdyw/api/'
 const instance = axios.create({
   baseURL: BASEURL,
   timeout: 60 * 1000

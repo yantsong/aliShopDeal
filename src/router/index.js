@@ -34,6 +34,24 @@ export default new Router({
         import ('@/views/Register.vue')
     },
     {
+      path: '/orderOk',
+      name: 'OrderOk',
+      component: () =>
+        import ('@/views/order/OrderOk.vue')
+    },
+    {
+      path: '/orderCancel',
+      name: 'OrderCancel',
+      component: () =>
+        import ('@/views/order/OrderCancel.vue')
+    },
+    {
+      path: '/getOrder',
+      name: 'GetOrder',
+      component: () =>
+        import ('@/views/order/GetOrder.vue')
+    },
+    {
       path: '/message',
       name: 'Message',
       component: () =>

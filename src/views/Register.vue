@@ -10,12 +10,12 @@
        <ul>
          <li>
            <em>手机号</em>
-           <input type="text" placeholder="请输入手机号">
-           <span bts>获取验证码</span>
+           <input type="text" placeholder="请输入手机号" v-model="form.phone">
+           <span bts @click="getCode">获取验证码</span>
          </li>
          <li>
            <em>验证码</em>
-           <input type="text" placeholder="请输入验证码">
+           <input type="text" placeholder="请输入验证码" v-model="form.code">
          </li>
          <li>
            <em>邀请码</em>
@@ -23,20 +23,20 @@
          </li>
          <li>
            <em>设置登录密码</em>
-           <input type="text" placeholder="请输入密码">
+           <input type="text" placeholder="请输入密码" v-model.trim="form.password">
          </li>
          <li>
            <em>重新输入密码</em>
-           <input type="text" placeholder="请重新输入密码">
+           <input type="text" placeholder="请重新输入密码" v-model.trim="repassword">
          </li>
        </ul>
-       <div bts>
+       <div bts @click="_register">
          确认注册进入下一步
        </div>
      </div>
      <div class="register-step2" v-if="step == 2">
         <section lr-is>
-            <input type="text" placeholder=" 淘口令">
+            <input type="text" placeholder=" 淘口令" v-model="taoCode">
             <span bts>复制淘口令</span>
         </section>
         <div>1.请复制上方的淘口令,并打开手机淘宝</div>
@@ -46,7 +46,7 @@
             <span bts>粘贴</span>
         </section>
         <div>3.粘贴已拍下的订单号</div>
-        <p class="btn" bts> 确认并绑定</p>
+        <p class="btn" @click="_commitOrder" bts> 确认并绑定</p>
         <p>审核人员会根据您拍下的淘宝号自动绑定该账号哦</p>
      </div>
     <div class="register-step3" v-if="step == 3">
@@ -61,18 +61,47 @@
 </template>
 
 <script>
+import api from "@/api/login";
+
 export default {
   data() {
     return {
-      step: 3
+      step: 2,
+      repassword: "",
+      taoCode: "",
+      form: {
+        phone: "",
+        password: "",
+        code: "",
+        invite_code: "a7abGrPb8R"
+      }
     };
   },
 
   created() {},
 
-  mounted() {},
+  mounted() {
+    this._getTaoCode();
+  },
 
-  methods: {},
+  methods: {
+    getCode() {
+      api.getCaptcha(this.form.phone).then(res => console.log(res));
+    },
+    _getTaoCode() {
+      api.getTaoCode().then(res => (this.taoCode = res.data.message));
+    },
+    _commitOrder() {
+      api.commitOrder().then(res => console.log(res));
+    },
+    _register() {
+      api.register(this.form).then(res => {
+        if (res.data.success) {
+          this.step = 2;
+        }
+      });
+    }
+  },
 
   computed: {},
 
@@ -113,7 +142,7 @@ export default {
       &:nth-child(1) {
         border: 0;
         span {
-          width: 166px;
+          width: 186px;
         }
         em,
         input {

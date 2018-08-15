@@ -4,18 +4,18 @@
      <ul>
          <li>
              <span>手机号</span>
-             <input type="text" placeholder="请输入手机号">
+             <input type="text" placeholder="请输入手机号" v-model="form.phone">
          </li>
          <li>
              <span>密码</span>
-             <input type="text" placeholder="请输入密码">
+             <input type="text" placeholder="请输入密码" v-model="form.password">
          </li>
      </ul>
      <div class="login-check">
      <p><i></i> <span>记住账号密码</span></p>
      <em>忘记密码</em>
      </div>
-     <div class="login-button" bts>
+     <div class="login-button" @click="_login" bts>
        登录
      </div>
      <div class="login-fast">
@@ -25,16 +25,26 @@
 </template>
 
 <script>
+import api from "@/api/login";
 export default {
   data() {
-    return {};
+    return {
+      form: {
+        phone: "",
+        password: ""
+      }
+    };
   },
 
   created() {},
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    _login() {
+      api.login(this.form).then(res => console.log(res));
+    }
+  },
 
   computed: {},
 
