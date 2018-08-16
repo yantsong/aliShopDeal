@@ -3,12 +3,11 @@ import Router from 'vue-router'
 import Index from '@/views/index'
 
 Vue.use(Router)
-
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [{
       path: '/',
-      redirect: '/login'
+      redirect: '/index'
     },
     {
       path: '/index',
@@ -113,3 +112,21 @@ export default new Router({
     }
   ]
 })
+router.beforeEach(
+  (to, from, next) => {
+    if (!window.localStorage.getItem('token')) {
+      next({
+        path: '/login'
+      });
+    } else {
+      if (to === '/login') {
+        next({
+          path: '/'
+        });
+      } else {
+        next()
+      }
+    }
+  }
+)
+export default router

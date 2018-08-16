@@ -9,12 +9,10 @@
     "stage-2"
   ],
   "plugins": ["transform-vue-jsx",
-    "transform-runtime", [
-      "component",
-      {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-chalk"
-      }
-    ]
+    "transform-runtime", ["import", {
+      "libraryName": "vant",
+      "libraryDirectory": "es",
+      "style": true
+    }]
   ]
 }

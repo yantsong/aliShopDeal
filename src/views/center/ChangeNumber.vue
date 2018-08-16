@@ -11,29 +11,55 @@
             <input type="text" :placeholder="holderText" v-model="newnumber">
          </li>
      </ul>
-     <div class="changenumber-button" bts> 确认修改</div>
+     <div class="changenumber-button" bts @click="_bindHandel"> 确认修改</div>
  </div>
 </template>
 
 <script>
+import api from "@/api/center";
 export default {
   data() {
     return {
-      number: 0,
+      number: "暂无",
       name: "",
       holderText: "",
       newnumber: ""
     };
   },
   created() {
-    this.number = this.$route.query.id;
+    console.log(this.$route.query.id);
+    // eslint-disable-next-line
+    if (this.$route.query.id != 0) {
+      this.number = this.$route.query.id;
+    } else {
+      this.number = "暂无";
+    }
     this.name = this.$route.query.name;
     this.holderText = `请输入要绑定的${this.$route.query.name}号`;
   },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    _bindHandel() {
+      let value = this.newnumber;
+      if (this.name === "QQ") {
+        api.bindQQ({ qq: value }).then(res => {
+          if (res.data.success) {
+            this.$toast(res.data.message);
+            setTimeout(() => this.$router.go(-1), 1000);
+          }
+        });
+      } else {
+        api.bindWx({ we_chat: value }).then(res => {
+          if (res.data.success) {
+            this.$toast(res.data.message);
+            setTimeout(() => this.$router.go(-1), 1000);
+          }
+        });
+      }
+    }
+  },
 
   computed: {},
 

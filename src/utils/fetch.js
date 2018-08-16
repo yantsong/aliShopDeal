@@ -1,8 +1,32 @@
 import axios from 'axios'
+import {
+  Toast
+} from 'vant'
+
 const BASEURL = 'http://47.75.210.100/sdyw/api/'
 const instance = axios.create({
   baseURL: BASEURL,
   timeout: 60 * 1000
 })
+instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+instance.interceptors.request.use(
+  config => {
+    let token = window.localStorage.getItem('token')
+    token && (config.headers['token'] = token)
+    return config
+  }
+)
+instance.interceptors.response.use(
+  res => {
+    if (!res.data.success) {
+      Toast(res.data.message)
+    }
+    return res
+  },
+  err => {
+    console.log(err);
+    return err
+  }
+)
 
 export default instance

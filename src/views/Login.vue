@@ -42,7 +42,12 @@ export default {
 
   methods: {
     _login() {
-      api.login(this.form).then(res => console.log(res));
+      api.login(this.form).then(res => {
+        if (res.data.success) {
+          window.localStorage.setItem("token", res.data.message);
+          this.$router.push("/");
+        }
+      });
     }
   },
 

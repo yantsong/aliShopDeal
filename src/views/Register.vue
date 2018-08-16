@@ -62,18 +62,20 @@
 
 <script>
 import api from "@/api/login";
+// eslint-disable-next-line
+import { Toast } from "vant";
 
 export default {
   data() {
     return {
-      step: 2,
+      step: 1,
       repassword: "",
       taoCode: "",
       form: {
         phone: "",
         password: "",
         code: "",
-        invite_code: "a7abGrPb8R"
+        invite_code: ""
       }
     };
   },
@@ -82,6 +84,7 @@ export default {
 
   mounted() {
     this._getTaoCode();
+    this._getInviteCode();
   },
 
   methods: {
@@ -91,15 +94,29 @@ export default {
     _getTaoCode() {
       api.getTaoCode().then(res => (this.taoCode = res.data.message));
     },
+    _getInviteCode() {
+      api
+        .getInviteCode()
+        .then(res => (this.form.invite_code = res.data.message));
+    },
     _commitOrder() {
-      api.commitOrder().then(res => console.log(res));
+      api.commitOrder().then(res => {
+        if (res.data.success) {
+          this.step = 3;
+          setTimeout(() => this.$router.push("/index"), 500);
+        }
+      });
     },
     _register() {
       api.register(this.form).then(res => {
         if (res.data.success) {
+          window.localStorage.setItem("token", res.data.message);
+          this.$toast.clear();
           this.step = 2;
+          this._getTaoCode();
         }
       });
+      this.$toast.loading();
     }
   },
 

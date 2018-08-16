@@ -9,28 +9,26 @@
          <section>
              <dl>
                  <dt>持卡人姓名</dt>
-                 <dd><input type="text" placeholder="请填写姓名"></dd>
+                 <dd><input type="text" placeholder="请填写姓名" v-model="form.name"></dd>
              </dl>
              <dl>
-                 <dt>持卡人姓名</dt>
+                 <dt>填写开户行</dt>
                  <dd>
-                  <select name="none" id="select" value="2222">
-                    <option value="111">请填写开户银行</option>
-                    <option value="2222">2222</option>
-                    <option value="3333">3333</option>
-                    <option value="4444">4444</option>
+                  <select name="none" id="select" v-model="form.bank">
+                    <option value="">请填写开户银行</option>
+                    <option :value="item.id" v-for="(item,index) in banks" :key="index">{{item.name}}</option>
                   </select>
                 </dd>
              </dl>
              <dl>
-                 <dt>持卡人姓名</dt>
-                 <dd><input type="text" placeholder="请填写银行卡号"></dd>
+                 <dt>银行卡号</dt>
+                 <dd><input type="text" placeholder="请填写银行卡号" v-model.trim="form.card_no"></dd>
              </dl>
              <p>
                  如果您选择的银行全称没有在选项列表中,请更换列表中有的银行卡
              </p>
          </section>
-         <div class="bindcard-bind-btn" bts>
+         <div class="bindcard-bind-btn" bts @click="_bindHandel">
              提交绑定
          </div>
      </div>
@@ -38,41 +36,35 @@
 </template>
 <script>
 /* eslint-disable no-unused-vars*/
-import { Select, Option } from "element-ui";
+// import { Select, Option } from "element-ui";
+import api from "@/api/center";
 export default {
   data() {
     return {
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕"
-        },
-        {
-          value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
-        }
-      ],
-      value: ""
+      banks: [],
+      form: {
+        bank: "",
+        name: "",
+        card_no: ""
+      }
     };
   },
 
   created() {},
 
-  mounted() {},
+  mounted() {
+    api.getBankList().then(res => (this.banks = res.data.message));
+  },
 
-  methods: {},
+  methods: {
+    _bindHandel() {
+      api.bindBankCard(this.form).then(res => {
+        if (res.data.success) {
+          this.$router.go(-1);
+        }
+      });
+    }
+  },
 
   computed: {},
 

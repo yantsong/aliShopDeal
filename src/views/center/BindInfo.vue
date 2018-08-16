@@ -2,12 +2,12 @@
 <template>
  <div class="bindinfo">
      <ul>
-         <li><span>旺旺号</span><em>{{data.wangwang}}</em></li>
+         <li><span>旺旺号</span><em>{{data.ww}}</em></li>
          <li><span>手机号</span><em>{{data.phone}}</em></li>
          <li @click="bindCard(data.card)"><span>绑定银行卡</span><i class='iconfont icon-toright'></i></li>
          <li><span>身份证号</span><i class='iconfont icon-toright'></i></li>
          <li @click="changeQQ(data.qq, 'QQ')"><span>QQ</span><i class='iconfont icon-toright'></i></li>
-         <li @click="changeWe(data.wechat, '微信')"><span>微信</span><i class='iconfont icon-toright'></i></li>
+         <li @click="changeWe(data.we_chat, '微信')"><span>微信</span><i class='iconfont icon-toright'></i></li>
      </ul>
  </div>
 </template>
@@ -22,16 +22,18 @@ export default {
   },
 
   created() {
-    api.getBaseInfo().then(res => (this.data = res.data));
+    api.getBaseInfo().then(res => (this.data = res.data.message));
   },
 
   mounted() {},
 
   methods: {
     changeQQ(id, name) {
+      if (!id) id = 0;
       this.$router.push(`/changenumber?id=${id}&name=${name}`);
     },
     changeWe(id, name) {
+      if (!id) id = 0;
       this.$router.push(`/changenumber?id=${id}&name=${name}`);
     },
     bindCard(id) {
