@@ -1,5 +1,4 @@
 <!-- getorder -->
-import func from './vue-temp/vue-editor-bridge';
 <template>
  <div class="getorder">
      <section class="getorder-timer" bsd>

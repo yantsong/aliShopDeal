@@ -1,31 +1,49 @@
 <!-- orderok -->
 <template>
  <div class="orderok">
-     <h1><i class='iconfont icon-gou1'></i>接单成功</h1>
+     <h1><i class='iconfont icon-gou'></i>接单成功</h1>
      <ul bsd>
-         <li><span>垫付金额</span><em><b>888</b>元</em></li>
-         <li><span>垫付金额</span><em><b>888</b>元</em></li>
-         <li><span>垫付金额</span><em><b>888</b>元</em></li>
-         <li><span>垫付金额</span><em><b>888</b>元</em></li>
-         <li><span>垫付金额</span><em><b>888</b></em></li>
-         <li><span></span><em><b></b></em></li>
+         <li><span>垫付金额</span><em><b>{{data&&data.prepay}}</b>元</em></li>
+         <li><span>任务佣金</span><em><b>{{data&&data.reward}}</b>元</em></li>
+         <li><span>限时完成</span><em><b>60</b>分钟</em></li>
+         <li><span>任务执行者</span><em><b>{{data&&data.tb}}</b></em></li>
+         <li style="border:none"><span></span><em><b></b></em></li>
      </ul>
-     <div btsb>操作任务</div>
-     <div btsb>取消任务</div>
+     <div btsb @click="_submit(data.id)">操作任务</div>
+     <div btsb @click="_cancel(data.id)">取消任务</div>
  </div>
 </template>
 
 <script>
+import api from "@/api/order";
 export default {
   data() {
-    return {};
+    return {
+      data: ""
+    };
   },
 
-  created() {},
+  created() {
+    let id = this.$route.params.id;
+    console.log(api);
+    api.getOrder(id).then(res => {
+      console.log(111);
+      if (res.data.success) {
+        this.data = res.data.message;
+      }
+    });
+  },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    _cancel(id) {
+      this.$router.push(`/orderCancel/${id}`);
+    },
+    _submit(id) {
+      this.$router.push(`/getOrder/${id}`);
+    }
+  },
 
   computed: {},
 

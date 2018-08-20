@@ -8,6 +8,11 @@ import fastclick from 'fastclick'
 import {
   Toast
 } from 'vant';
+import {
+  NoticeBar
+} from 'vant';
+
+Vue.use(NoticeBar);
 // import {
 //   Select,
 //   Option

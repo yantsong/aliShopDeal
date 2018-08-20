@@ -2,23 +2,23 @@
 <template>
  <div class="mfooter" >
    <router-link to="/index"  class="mfooter-tabs">
-     <i class='iconfont icon-piaoliusanicon-geren-'></i><br>
+     <i class='iconfont icon-home1'></i><br>
      <span>首页</span>
    </router-link>
    <router-link to="/tasks"  class="mfooter-tabs">
-     <i class='iconfont icon-piaoliusanicon-geren-'></i><br>
+     <i class='iconfont icon-task'></i><br>
      <span>已接任务</span>
    </router-link>
    <router-link to="/message"  class="mfooter-tabs">
-     <i class='iconfont icon-piaoliusanicon-geren-'></i><br>
+     <i class='iconfont icon-image2'></i><br>
      <span>消息</span>
    </router-link>
    <router-link to="/apprentice"  class="mfooter-tabs">
-     <i class='iconfont icon-piaoliusanicon-geren-'></i><br>
+     <i class='iconfont icon-image1'></i><br>
      <span>徒弟</span>
    </router-link>
    <router-link to="/center"  class="mfooter-tabs">
-     <i class='iconfont icon-piaoliusanicon-geren-'></i><br>
+     <i class='iconfont icon-image3'></i><br>
      <span>个人中心</span>
    </router-link>
 

@@ -3,21 +3,24 @@
  <div class="page-index">
      <MFooter></MFooter>
      <div class="index-announcement" fcs bsd>
+       <div>
          <i class="iconfont icon-laba"></i>
-         <span>公告</span>
-         <h2>{{info.announcement}}</h2>
-     </div>
+        <span>公告</span>
+       </div>
+         <h2>
+           {{info.notice}}</h2>
+      </div>
      <div class="index-myinfo" bsd>
          <div class="myinfo" fcs>
              <img src="../assets/avt.png" alt="" class="avater">
              <ul>
-                 <li>UID:{{info.user.UUID}}</li>
-                 <li>您的师傅:{{info.user.teacher}}</li>
-                 <li>旺旺号:{{info.user.wangwang}}</li>
+                 <li>UID:{{info.id}}</li>
+                 <li>您的师傅:{{info.sf}}</li>
+                 <li>旺旺号:{{info.ww}}</li>
              </ul>
          </div>
          <div class="myintegral">
-             <p>我的积分:{{info.user.intergarl}}</p>
+             <p>我的积分:{{info.amount}}</p>
              <span bts>提现</span>
          </div>
      </div>
@@ -25,24 +28,28 @@
          <li bsd fccm>
              <i class='iconfont icon-jinri'></i>
              <span>今日已接</span>
-             <span>{{info.order.today.compelet}}/{{info.order.today.total}}</span>
+             <span>{{info.today_complete}}/{{info.today_count}}</span>
          </li>
          <li bsd fccm>
-             <i class='iconfont icon-jinri'></i>
-             <span>今日已接</span>
-             <span>{{info.order.day7.compelet}}/{{info.order.day7.total}}</span>
+             <i class='iconfont icon-image4'></i>
+             <span>本周已接</span>
+             <span>{{info.week_complete}}/{{info.week_count}}</span>
          </li>
          <li bsd fccm>
-             <i class='iconfont icon-jinri'></i>
-             <span>今日已接</span>
-             <span>{{info.order.day30.compelet}}/{{info.order.day30.total}}</span>
+             <i class='iconfont icon-icon-test2'></i>
+             <span>本月已接</span>
+             <span>{{info.month_complete}}/{{info.month_count}}</span>
          </li>
      </ul>
-     <div class="index-cancel" v-if="true">
-         <p bts>取消接单</p>
-         <img src="../assets/bg1.png" alt="">
+     <div class="index-cancel" v-if="status">
+         <p bts @click="status = 0">取消接单</p>
+         <div v-if="data.length">
+         <task-thumb v-for="item in data" :key="item.taskId" :data="item" :status="1">
+     </task-thumb>
+         </div>
+     <img src="../assets/bg1.png" alt="" v-else>
      </div>
-     <div class="index-bgimg" v-else>
+     <div class="index-bgimg" v-else @click="_getOrder">
          <img src="../assets/bg2.png" alt="">
      </div>
 
@@ -51,6 +58,8 @@
 
 <script>
 import MFooter from "@/components/MFooter.vue";
+import TaskThumb from "@/views/tasks/components/TaskThumb.vue";
+import { NoticeBar } from "vant";
 import api from "@/api/index";
 export default {
   data() {
@@ -71,24 +80,37 @@ export default {
             compelet: 0
           }
         }
-      }
+      },
+      status: 0
     };
   },
 
   components: {
-    MFooter
+    MFooter,
+    TaskThumb,
+    NoticeBar
   },
   created() {
     api.getIndexInfo(0).then(res => {
-      this.info = { ...res.data };
-      this.info.user = { ...res.data.user };
+      if (res.data.success) {
+        this.info = res.data.message;
+      }
     });
   },
   computed: {},
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    _getOrder() {
+      api.watingOrder().then(res => {
+        if (res.data.success) {
+          this.status = 1;
+          this.data = res.data.message;
+        }
+      });
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -99,13 +121,22 @@ export default {
     height: 74px;
     margin: 20px 0;
     background-color: #fff;
+    & > div {
+      width: 154px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
     i {
-      margin: 0 32px;
     }
     span {
       font-size: 24px;
     }
     h2 {
+      flex: 1;
+      padding-right: 40px;
+      font-size: 24px;
       overflow: hidden;
     }
   }

@@ -10,23 +10,24 @@
        <div class="task-thumb-detail-shopinfo" fc>
          <img src="@/assets/avt.png" alt="">
          <dl>
-           <dt>店铺名:{{data.shopName}}</dt>
+           <dt>店铺名:{{data.store_name}}</dt>
            <dd>垫付金额:{{data.prePay}}</dd>
            <dd class="order-sum">拍下数量:{{data.sum}}</dd>
-           <dd class="order-money">￥{{data.money}}</dd>
+           <dd class="order-money">￥{{data.goods_price}}</dd>
          </dl>
          <div class="task-thumb-detail-shopinfo-act" @click="doActive(data.status)">
-          <span v-if="data.status == 0">已完成</span>
-          <span v-if="data.status == 1">继续操作</span>
+          <span v-if="data.status == 0" @click="_submitOrder">继续操作</span>
+          <span v-if="data.status == 1" @click="_submitOrder">继续操作</span>
           <span v-if="data.status == 2">已完成</span>
           <span v-if="data.status == 3">评价任务</span>
-          <span v-if="data.status == 4">查看失败原因</span>
+          <span v-if="data.status == -1">查看失败原因</span>
          </div>
        </div>
        <div class="line"></div>
        <div class="task-thumb-detail-id">
-         <p>任务号:{{data.taskId}}</p>
-         <span bts>复制</span>
+         <p>任务号:{{data.jhrw_id}}</p>
+         <span bts v-if="!status">复制</span>
+         <span bts v-else @click="takeOrder(data.jhrw_id)">点击接单</span>
        </div>
        <div class="task-thumb-detail-cptime" v-if="data.status == 2">
          {{data.compeletTime}}
@@ -37,24 +38,44 @@
 </template>
 
 <script>
+import api from "@/api/index.js";
+import { Toast } from "vant";
 export default {
   data() {
     return {};
   },
-  props: ["data"],
+  props: {
+    data: Object,
+    status: {
+      default: 0
+    }
+  },
   created() {},
 
   mounted() {},
 
   methods: {
+    _submitOrder() {
+      this.$router.push(`/submitOrder/${this.data.id}`);
+    },
     doActive(status) {
       this.$emit("doactive", status);
+    },
+    takeOrder(id) {
+      api.takeOrder(id).then(res => {
+        if (res.data.success) {
+          this.$toast("接单成功");
+          this.$router.push(`/orderOk/${id}`);
+        }
+      });
     }
   },
 
   computed: {},
 
-  components: {}
+  components: {
+    Toast
+  }
 };
 </script>
 <style lang='scss' scoped>
@@ -87,6 +108,7 @@ $org: #ffb643;
       justify-content: flex-start;
       padding-bottom: 24px;
       color: #333;
+      text-align: left;
       img {
         width: 170px;
         height: 170px;

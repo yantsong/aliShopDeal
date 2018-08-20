@@ -1,6 +1,7 @@
 <!--  -->
 <template>
  <div class="center">
+   <MFooter></MFooter>
    <div class="center-banner" fcs>
      <img src="../../assets/avt.png" alt="">
      <span>名字</span>
@@ -19,14 +20,14 @@
    <ul class="center-list" bsd>
      <li>
        <p>
-         <i class='iconfont icon-icon-test'></i>
+         <i class='iconfont icon-txjl' style="color:#3399cc"></i>
          <span>提现记录</span>
        </p>
        <em>></em>
      </li>
      <li>
        <p>
-         <i class='iconfont icon-icon-test'></i>
+         <i class='iconfont icon-id_card' style="color:#99cc99"></i>
          <span>积分明细</span>
        </p>
        <em>></em>
@@ -35,14 +36,14 @@
    <ul class="center-list" bsd>
      <li>
        <p>
-         <i class='iconfont icon-icon-test'></i>
+         <i class='iconfont icon-help' style="color:#ff6699"></i>
          <span>修改密码</span>
        </p>
        <em>></em>
      </li>
      <li>
        <router-link tag="p" to="/bindinfo">
-         <i class='iconfont icon-icon-test'></i>
+         <i class='iconfont icon-about' style="color:#ffcc33"></i>
          <span>信息绑定</span>
        </router-link >
        <em>></em>
@@ -52,6 +53,7 @@
 </template>
 
 <script>
+import MFooter from "@/components/MFooter.vue";
 export default {
   data() {
     return {};
@@ -65,7 +67,9 @@ export default {
 
   computed: {},
 
-  components: {}
+  components: {
+    MFooter
+  }
 };
 </script>
 <style lang='scss' scoped>

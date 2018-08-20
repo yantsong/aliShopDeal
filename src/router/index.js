@@ -33,19 +33,25 @@ let router = new Router({
         import ('@/views/Register.vue')
     },
     {
-      path: '/orderOk',
+      path: '/orderOk/:id',
       name: 'OrderOk',
       component: () =>
         import ('@/views/order/OrderOk.vue')
     },
     {
-      path: '/orderCancel',
+      path: '/orderCancel/:id',
       name: 'OrderCancel',
       component: () =>
         import ('@/views/order/OrderCancel.vue')
     },
     {
-      path: '/getOrder',
+      path: '/submitOrder/:id',
+      name: 'SubmitOrder',
+      component: () =>
+        import ('@/views/order/SubmitOrder.vue')
+    },
+    {
+      path: '/getOrder/:id',
       name: 'GetOrder',
       component: () =>
         import ('@/views/order/GetOrder.vue')
@@ -114,14 +120,14 @@ let router = new Router({
 })
 router.beforeEach(
   (to, from, next) => {
-    if (!window.localStorage.getItem('token')) {
-      next({
-        path: '/login'
-      });
+    console.log(to);
+    let storage = localStorage.getItem('token')
+    if (to.path === '/login') {
+      next()
     } else {
-      if (to === '/login') {
+      if (!storage) {
         next({
-          path: '/'
+          path: '/login'
         });
       } else {
         next()

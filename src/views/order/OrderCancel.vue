@@ -4,13 +4,14 @@
      <h1>选择取消原因
      </h1>
      <ul bsd>
-         <li v-for="(item,index) in reason" :key="index"><span>商品找不到了</span><i class='iconfont icon-gou1' :class="active== index ? 'active': ''"></i></li>
+         <li @click="active=index" v-for="(item,index) in reason" :key="index"><span>{{item}}</span><i class='iconfont icon-gou1' :class="active== index ? 'active': ''"></i></li>
      </ul>
-     <div btsb>申请取消并派送给其他用户</div>
+     <div btsb @click="cancel">申请取消并派送给其他用户</div>
  </div>
 </template>
 
 <script>
+import api from "@/api/order";
 export default {
   data() {
     return {
@@ -30,7 +31,20 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    cancel() {
+      let id = this.$route.params.id;
+      let remark = this.reason[this.active];
+      api.cancelOrder(id, remark).then(res => {
+        if (res.data.success) {
+          this.$toast("放弃任务成功");
+          setTimeout(() => {
+            this.$router.push("/");
+          }, 1000);
+        }
+      });
+    }
+  },
 
   computed: {},
 

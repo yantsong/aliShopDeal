@@ -18,8 +18,15 @@ instance.interceptors.request.use(
 )
 instance.interceptors.response.use(
   res => {
+    // eslint-disable-next-line
+    if (res.data.message == '登陆凭证已失效，请重新登录！') {
+      console.log(res.data.message);
+      localStorage.clear()
+      window.location.replace('/');
+    }
     if (!res.data.success) {
       Toast(res.data.message)
+      console.log(res.data.message, 1);
     }
     return res
   },
