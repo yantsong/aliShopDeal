@@ -1,11 +1,11 @@
 <!--  -->
 <template>
- <div class="message-item" @click="handClick(message.messageId)">
-     <div class="message-item-time"> <span>{{message.messageTime}}</span></div>
+ <div class="message-item" @click="handClick(message.id)">
+     <div class="message-item-time"> <span>{{message.notice_time}}</span></div>
      <div class="message-item-detail" bsd>
          <dl>
-             <dt>{{message.messageTitle}}</dt>
-             <dd>{{message.messageDetail}}</dd>
+             <dt>{{message.title}}</dt>
+             <dd>{{message.content}}</dd>
          </dl>
          <div class="line"></div>
          <p><strong>查看详情</strong> <em>></em></p>
@@ -78,7 +78,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     line-height: 44px;
-    margin-top:12px;
+    margin-top: 12px;
     strong {
       font-size: 26px;
     }

@@ -1,13 +1,13 @@
 <!-- historyCode -->
 <template>
  <div class="history-code">
-     <Integral-list @getMore='getMore'>
+     <Integral-list @getMore='getMore' :status="status">
        <ul class="history-code-list">
          <li v-for="(item,index) in listsData" :key="index" class="history-code-item">
              <div class="history-code-item-left">
                <dl>
-                  <dt>{{item.inviteCode}} <em v-if="item.ifused">(未使用)</em> <em v-else class="color-style"> （已使用）</em></dt>
-                  <dd class="time">{{item.time}}</dd>
+                  <dt>{{item.invite_code}} <em v-if="!item.status">(未使用)</em> <em v-else class="color-style"> （已使用）</em></dt>
+                  <dd class="time">{{item.create_time}}</dd>
                </dl>
              <span class="history-code-word" bts @click="doCopy">复制</span>
              </div>
@@ -23,23 +23,35 @@ import api from "@/api/apprentice.js";
 export default {
   data() {
     return {
-      listsData: []
+      listsData: [],
+      page: 1,
+      status: 0
     };
   },
 
   created() {
-    api.getHistoryCode().then(res => (this.listsData = res.data.historyCode));
+    api.getHistoryCode().then(res => {
+      if (res.data.success) {
+        this.listsData = res.data.message;
+      }
+    });
   },
 
   mounted() {},
 
   methods: {
     getMore() {
-      api
-        .getHistoryCode()
-        .then(
-          res => (this.listsData = this.listsData.concat(res.data.historyCode))
-        );
+      this.page++;
+      this.$nextTick();
+      api.getHistoryCode(this.page).then(res => {
+        if (res.data.success) {
+          if (res.data.message.length === 0) {
+            this.status = 1;
+            return;
+          }
+          this.listsData = this.listsData.concat(res.data.message);
+        }
+      });
     },
     doCopy() {
       console.log("copy");

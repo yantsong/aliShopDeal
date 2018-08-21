@@ -54,6 +54,7 @@ export default {
       let form = new FormData();
       form.append("certificate", img1, img1.name);
       this.form1 = form;
+      this.$toast("图片上传成功");
     },
     submit() {
       this.form1.append("id", this.$route.params.id);
@@ -62,6 +63,7 @@ export default {
         .submitPic(this.form1)
         .then(response => {
           console.log(response);
+          this.$router.push("/waitReview");
         })
         .catch(error => {
           console.log(error);

@@ -1,7 +1,7 @@
 <!-- messages -->
 <template>
  <div class="message">
-   <MessageItem v-for="item in messages" :key="item.messageId" :message="item" @click="handClick(0)">
+   <MessageItem v-for="item in messages" :key="item.messageId" :message="item">
    </MessageItem>
  </div>
 </template>
@@ -17,13 +17,16 @@ export default {
   },
 
   created() {
-    api.getmessages().then(res => (this.messages = res.data.messages));
+    api.getmessages().then(res => {
+      if (res.data.success) {
+        this.messages = res.data.message;
+      }
+    });
   },
 
   mounted() {},
 
-  methods: {
-  },
+  methods: {},
 
   computed: {},
 

@@ -4,11 +4,11 @@
    <ul class="apprentice-count" bsd fc>
      <li>
        <p>上月积分余额</p>
-       <span>{{info&&info.balance}}</span>
+       <span>{{info&&info.last_month}}</span>
      </li>
      <li>
        <p>本月收入</p>
-       <span>{{info&&info.balance}}</span>
+       <span>{{info&&info.this_month}}</span>
      </li>
    </ul>
    <div class="apprentice-tips">
@@ -17,25 +17,21 @@
    </div>
    <ul class="apprentice-count" invite bsd fc>
      <li>
-       <p>{{info&&info.invitationCode}}</p>
+       <p>{{info&&info.invite_code}}</p>
        <span>复制</span>
      </li>
      <li>
        <p>生成邀请码</p>
-       <span>已生成:{{info&&info.exist}}/{{info&&info.totalCode}}</span>
+       <span>已生成:{{info&&info.cnt_invite_code}}/{{info&&info.max_invite_code}}</span>
      </li>
    </ul>
    <ul class="apprentice-tablist" bsd >
-     <li>
-       <span>徒弟列表</span>
-       <em>></em>
-     </li>
      <li @click="toIntegralDetail">
        <span>积分明细</span>
        <em>></em>
      </li>
-     <li>
-       <span @click="toList">徒弟列表</span>
+     <li  @click="toList">
+       <span>徒弟列表</span>
        <em>></em>
      </li>
    </ul>
@@ -51,7 +47,7 @@ export default {
     };
   },
   created() {
-    api.getInviteInfo().then(res => (this.info = res.data));
+    api.getInviteInfo().then(res => (this.info = res.data.message));
   },
   components: {},
 
@@ -77,6 +73,7 @@ export default {
   padding: 0 10px;
   &-tips {
     text-align: left;
+    font-size: 26px;
     em {
       color: #ffb643;
       margin-left: 30px;

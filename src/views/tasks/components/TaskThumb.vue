@@ -1,6 +1,6 @@
 <!-- taskThumb -->
 <template>
- <div class="task-thumb" >
+ <div class="task-thumb" @click="orderDetail">
      <div class="task-thumb-time" v-if="data.status == 1">
        <span>
        预计明天{{data.preTime}}完成审核
@@ -12,7 +12,7 @@
          <dl>
            <dt>店铺名:{{data.store_name}}</dt>
            <dd>垫付金额:{{data.prePay}}</dd>
-           <dd class="order-sum">拍下数量:{{data.sum}}</dd>
+           <dd class="order-sum">拍下数量:1</dd>
            <dd class="order-money">￥{{data.goods_price}}</dd>
          </dl>
          <div class="task-thumb-detail-shopinfo-act" @click="doActive(data.status)">
@@ -27,7 +27,7 @@
        <div class="task-thumb-detail-id">
          <p>任务号:{{data.jhrw_id}}</p>
          <span bts v-if="!status">复制</span>
-         <span bts v-else @click="takeOrder(data.jhrw_id)">点击接单</span>
+         <span bts v-else @click.stop="takeOrder(data.jhrw_id)">点击接单</span>
        </div>
        <div class="task-thumb-detail-cptime" v-if="data.status == 2">
          {{data.compeletTime}}
@@ -56,7 +56,7 @@ export default {
 
   methods: {
     _submitOrder() {
-      this.$router.push(`/submitOrder/${this.data.id}`);
+      this.$router.push(`/getOrder/${this.data.jhrw_id}`);
     },
     doActive(status) {
       this.$emit("doactive", status);
@@ -68,6 +68,10 @@ export default {
           this.$router.push(`/orderOk/${id}`);
         }
       });
+    },
+    orderDetail() {
+      let id = this.data.jhrw_id;
+      this.status && this.$router.push(`/OrderDetail/${id}`);
     }
   },
 

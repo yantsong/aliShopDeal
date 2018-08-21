@@ -2,8 +2,11 @@
 <template>
  <div class="integral-list">
    <slot></slot>
-     <div class="integral-list-more" bts @click="clickMore">
+     <div class="integral-list-more" bts @click="clickMore" v-if="!status">
          加载更多
+     </div>
+     <div class="integral-list-nomore"  v-else>
+         已显示全部
      </div>
  </div>
 </template>
@@ -13,7 +16,7 @@ export default {
   data() {
     return {};
   },
-  props: ["listsData"],
+  props: ["listsData", "status"],
 
   created() {},
 
@@ -60,6 +63,10 @@ export default {
     width: 620px;
     line-height: 71px;
     margin: 48px auto 0;
+  }
+  &-nomore {
+    text-align: center;
+    padding: 20px 0;
   }
 }
 </style>

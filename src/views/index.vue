@@ -187,6 +187,9 @@ export default {
         font-size: 48px;
         color: #ffb643;
       }
+      span {
+        font-size: 28px;
+      }
     }
   }
   .index-bgimg {

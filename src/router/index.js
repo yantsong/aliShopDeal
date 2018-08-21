@@ -12,25 +12,37 @@ let router = new Router({
     {
       path: '/index',
       name: 'index',
-      component: Index
+      component: Index,
+      meta: {
+        title: '首页'
+      }
     },
     {
       path: '/center',
       name: 'Center',
       component: () =>
-        import ('@/views/center/center.vue')
+        import ('@/views/center/center.vue'),
+      meta: {
+        title: '个人中心'
+      }
     },
     {
       path: '/login',
       name: 'Login',
       component: () =>
-        import ('@/views/Login.vue')
+        import ('@/views/Login.vue'),
+      meta: {
+        title: '登录'
+      }
     },
     {
       path: '/register',
       name: 'Register',
       component: () =>
-        import ('@/views/Register.vue')
+        import ('@/views/Register.vue'),
+      meta: {
+        title: '注册'
+      }
     },
     {
       path: '/orderOk/:id',
@@ -42,7 +54,10 @@ let router = new Router({
       path: '/orderCancel/:id',
       name: 'OrderCancel',
       component: () =>
-        import ('@/views/order/OrderCancel.vue')
+        import ('@/views/order/OrderCancel.vue'),
+      meta: {
+        title: '选择取消原因'
+      }
     },
     {
       path: '/submitOrder/:id',
@@ -57,16 +72,28 @@ let router = new Router({
         import ('@/views/order/GetOrder.vue')
     },
     {
+      path: '/OrderDetail/:id',
+      name: 'OrderDetail',
+      component: () =>
+        import ('@/views/order/OrderDetail.vue')
+    },
+    {
       path: '/message',
       name: 'Message',
       component: () =>
-        import ('@/views/message/Message.vue')
+        import ('@/views/message/Message.vue'),
+      meta: {
+        title: '消息'
+      }
     },
     {
       path: '/message/:id',
       name: 'MessageItem',
       component: () =>
-        import ('@/views/message/MessageDetail.vue')
+        import ('@/views/message/MessageDetail.vue'),
+      meta: {
+        title: '消息详情'
+      }
     },
     {
       path: '/tasks',
@@ -75,52 +102,83 @@ let router = new Router({
         import ('@/views/tasks/tasks.vue')
     },
     {
+      path: '/waitReview',
+      name: 'WaitReview',
+      component: () =>
+        import ('@/views/tasks/waitReview.vue'),
+      meta: {
+        title: '等待审核'
+      }
+    },
+    {
       path: '/apprentice',
       name: 'Apprentice',
       component: () =>
-        import ('@/views/apprentice/apprentice.vue')
+        import ('@/views/apprentice/apprentice.vue'),
+      meta: {
+        title: '徒弟'
+      }
     },
     {
       path: '/integralDetail',
       name: 'IntegralDetail',
       component: () =>
-        import ('@/views/apprentice/IntegralDetail.vue')
+        import ('@/views/apprentice/IntegralDetail.vue'),
+      meta: {
+        title: '积分明细'
+      }
     },
     {
       path: '/historyCode',
       name: 'HistoryCode',
       component: () =>
-        import ('@/views/apprentice/HistoryCode.vue')
+        import ('@/views/apprentice/HistoryCode.vue'),
+      meta: {
+        title: '历史邀请码'
+      }
     },
     {
       path: '/bindInfo',
       name: 'BindInfo',
       component: () =>
-        import ('@/views/center/bindInfo.vue')
+        import ('@/views/center/bindInfo.vue'),
+      meta: {
+        title: '信息绑定'
+      }
     },
     {
       path: '/changenumber',
       name: 'Changenumber',
       component: () =>
-        import ('@/views/center/ChangeNumber.vue')
+        import ('@/views/center/ChangeNumber.vue'),
+      meta: {
+        title: '修改号码'
+      }
     },
     {
       path: '/bindcard',
       name: 'BindCard',
       component: () =>
-        import ('@/views/center/BindCard.vue')
+        import ('@/views/center/BindCard.vue'),
+      meta: {
+        title: '绑定银行卡'
+      }
     },
     {
       path: '/apprenticesList',
       name: 'ApprenticeList',
       component: () =>
-        import ('@/views/apprentice/ApprenticesList.vue')
+        import ('@/views/apprentice/ApprenticesList.vue'),
+      meta: {
+        title: '徒弟列表'
+      }
     }
   ]
 })
 router.beforeEach(
   (to, from, next) => {
     console.log(to);
+    document.title = to.meta.title
     let storage = localStorage.getItem('token')
     if (to.path === '/login') {
       next()
