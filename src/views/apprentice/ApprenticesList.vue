@@ -18,7 +18,7 @@ export default {
   },
 
   created() {
-    api.getApprenticeList().then(res => (this.data = res.data.apprentices));
+    api.getApprenticeList().then(res => (this.data = res.data.message));
   },
 
   mounted() {},

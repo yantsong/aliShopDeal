@@ -21,7 +21,7 @@
        <span>复制</span>
      </li>
      <li>
-       <p>生成邀请码</p>
+       <p @click="makeCode">生成邀请码</p>
        <span>已生成:{{info&&info.cnt_invite_code}}/{{info&&info.max_invite_code}}</span>
      </li>
    </ul>
@@ -56,6 +56,14 @@ export default {
   mounted() {},
 
   methods: {
+    makeCode() {
+      api.getInviteCode().then(res => {
+        if (res.data.success) {
+          this.$toast("邀请码已生成");
+          this.info.invite_code = res.data.message;
+        }
+      });
+    },
     toIntegralDetail() {
       this.$router.push("/integralDetail");
     },

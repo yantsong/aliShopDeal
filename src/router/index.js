@@ -36,6 +36,15 @@ let router = new Router({
       }
     },
     {
+      path: '/repassword',
+      name: 'Repassword',
+      component: () =>
+        import ('@/views/Repassword.vue'),
+      meta: {
+        title: '找回密码'
+      }
+    },
+    {
       path: '/register',
       name: 'Register',
       component: () =>
@@ -129,6 +138,15 @@ let router = new Router({
       }
     },
     {
+      path: '/CrashHistory',
+      name: 'CrashHistory',
+      component: () =>
+        import ('@/views/apprentice/CrashHistory.vue'),
+      meta: {
+        title: '提现记录'
+      }
+    },
+    {
       path: '/historyCode',
       name: 'HistoryCode',
       component: () =>
@@ -163,6 +181,14 @@ let router = new Router({
       meta: {
         title: '绑定银行卡'
       }
+    }, {
+      path: '/getCrash',
+      name: 'GetCrash',
+      component: () =>
+        import ('@/views/center/GetCrash.vue'),
+      meta: {
+        title: '提现'
+      }
     },
     {
       path: '/apprenticesList',
@@ -180,7 +206,7 @@ router.beforeEach(
     console.log(to);
     document.title = to.meta.title
     let storage = localStorage.getItem('token')
-    if (to.path === '/login') {
+    if (to.path === '/login' || to.path === '/repassword') {
       next()
     } else {
       if (!storage) {

@@ -13,7 +13,7 @@
      </ul>
      <div class="login-check">
      <p><i></i> <span>记住账号密码</span></p>
-     <em>忘记密码</em>
+     <router-link tag="em" to="/repassword">忘记密码</router-link>
      </div>
      <div class="login-button" @click="_login" bts>
        登录

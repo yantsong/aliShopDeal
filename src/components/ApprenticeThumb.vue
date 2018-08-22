@@ -4,22 +4,22 @@
      <div class="apprentices-thumb-avater">
          <img src="@/assets/avt.png" alt="">
          <br>
-         <span>{{data.user.userName}}</span>
+         <span>{{data.name}}</span>
      </div>
      <div class="apprentices-thumb-info">
          <div class="apprentices-thumb-info-phone">
              <div>
-                 <h3>平台ID:{{data.user.UUID}}</h3>
-                 <p>手机号:{{data.user.phone}}</p>
+                 <h3>平台ID:{{data.id}}</h3>
+                 <p>手机号:{{data.phone || '暂无'}}</p>
              </div>
              <i class="iconfont icon-dianhua"></i>
          </div>
          <div class="apprentices-thumb-info-total">
-             <span>任务总数: {{data.order.total}}</span>
-             <em>今日完成: {{data.order.today.compelet}}</em>
+             <span>任务总数: {{data.task_total}}</span>
+             <em>今日完成: {{data.task_tody}}</em>
          </div>
          <div class="apprentices-thumb-info-time">
-             注册时间: {{data.user.registeTime}}
+             注册时间: {{data.create_time}}
          </div>
      </div>
  </section>

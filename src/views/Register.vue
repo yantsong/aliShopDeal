@@ -11,7 +11,8 @@
          <li>
            <em>手机号</em>
            <input type="text" placeholder="请输入手机号" v-model="form.phone">
-           <span bts @click="getCode">获取验证码</span>
+           <span bts @click="getCode" v-if="!timer">获取验证码</span>
+           <span bts v-else>{{time}}s</span>
          </li>
          <li>
            <em>验证码</em>
@@ -62,6 +63,7 @@
 
 <script>
 import api from "@/api/login";
+import getcodemixin from "@/mixin/getcode";
 // eslint-disable-next-line
 import { Toast } from "vant";
 
@@ -79,7 +81,7 @@ export default {
       }
     };
   },
-
+  mixins: [getcodemixin],
   created() {},
 
   mounted() {
@@ -88,9 +90,6 @@ export default {
   },
 
   methods: {
-    getCode() {
-      api.getCaptcha(this.form.phone).then(res => console.log(res));
-    },
     _getTaoCode() {
       api.getTaoCode().then(res => (this.taoCode = res.data.message));
     },
@@ -159,7 +158,10 @@ export default {
       &:nth-child(1) {
         border: 0;
         span {
-          width: 186px;
+          flex: 0 0 186px;
+        }
+        em {
+          flex: 0 0 auto;
         }
         em,
         input {

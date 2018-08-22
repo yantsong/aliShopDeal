@@ -3,6 +3,8 @@ import qs from 'qs'
 export default {
   getBaseInfo: () => fetch.get(`sdyBindInfo`),
   getBankList: () => fetch.get(`bankList`),
+  getCrash: () => fetch.get(`withdrawIndex`),
+  getInfo: () => fetch.get(`sdyInfo`),
   bindWx: (params) => fetch.get(`updateWechat`, {
     params
   }),

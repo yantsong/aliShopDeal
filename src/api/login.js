@@ -3,11 +3,10 @@ import qs from 'qs'
 export default {
   getCaptcha: phone => fetch.get(`sendVerificationCode?phone=${phone}`),
   register: (parmas) => {
-    return fetch.post(`register`, qs.stringify(parmas), {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    })
+    return fetch.post(`register`, qs.stringify(parmas))
+  },
+  repassword: (parmas) => {
+    return fetch.post(`resetPassword`, qs.stringify(parmas))
   },
   login: parmas => fetch.post(`login`, parmas),
   getTaoCode: () => fetch.get(`panningCommand`),

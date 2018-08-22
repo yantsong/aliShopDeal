@@ -4,28 +4,28 @@
    <MFooter></MFooter>
    <div class="center-banner" fcs>
      <img src="../../assets/avt.png" alt="">
-     <span>名字</span>
-     <p>ID XXXXX</p>
+     <span>{{data.name || '张三'}}</span>
+     <p>ID {{data.id || '123'}}</p>
    </div>
    <ul class="center-count" bsd fc>
      <li>
-       <span>0</span>
+       <span>{{data.zrw_total_cnt}}</span>
        <p>任务完成总数</p>
      </li>
      <li>
-       <span>0</span>
-       <p>任务完成总数</p>
+       <span>{{data.success_rate * 100}}%</span>
+       <p>完成率</p>
      </li>
    </ul>
    <ul class="center-list" bsd>
-     <li>
+     <li @click="toCrashHistory">
        <p>
          <i class='iconfont icon-txjl' style="color:#3399cc"></i>
          <span>提现记录</span>
        </p>
        <em>></em>
      </li>
-     <li>
+     <li @click="toIntegralDetail" >
        <p>
          <i class='iconfont icon-id_card' style="color:#99cc99"></i>
          <span>积分明细</span>
@@ -53,17 +53,33 @@
 </template>
 
 <script>
+import api from "@/api/center";
 import MFooter from "@/components/MFooter.vue";
 export default {
   data() {
-    return {};
+    return {
+      data: {}
+    };
   },
 
-  created() {},
+  created() {
+    api.getInfo().then(res => {
+      if (res.data.success) {
+        this.data = res.data.message;
+      }
+    });
+  },
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    toIntegralDetail() {
+      this.$router.push("/integralDetail");
+    },
+    toCrashHistory() {
+      this.$router.push("/CrashHistory");
+    }
+  },
 
   computed: {},
 
