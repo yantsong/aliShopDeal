@@ -31,7 +31,7 @@
 
 <script>
 import api from "@/api/login";
-import getcodemixin from "@/mixin/getcode";
+import getCodemixin from "@/mixin/getCode";
 export default {
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
       }
     };
   },
-  mixins: [getcodemixin],
+  mixins: [getCodemixin],
 
   created() {},
 

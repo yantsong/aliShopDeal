@@ -63,7 +63,7 @@
 
 <script>
 import api from "@/api/login";
-import getcodemixin from "@/mixin/getcode";
+import getcodemixin from "@/mixin/getCode";
 // eslint-disable-next-line
 import { Toast } from "vant";
 
