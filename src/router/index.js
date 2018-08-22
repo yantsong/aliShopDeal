@@ -21,7 +21,7 @@ let router = new Router({
       path: '/center',
       name: 'Center',
       component: () =>
-        import ('@/views/center/center.vue'),
+        import ('@/views/center/Center.vue'),
       meta: {
         title: '个人中心'
       }
@@ -123,7 +123,7 @@ let router = new Router({
       path: '/apprentice',
       name: 'Apprentice',
       component: () =>
-        import ('@/views/apprentice/apprentice.vue'),
+        import ('@/views/apprentice/Apprentice.vue'),
       meta: {
         title: '徒弟'
       }
@@ -159,7 +159,7 @@ let router = new Router({
       path: '/bindInfo',
       name: 'BindInfo',
       component: () =>
-        import ('@/views/center/bindInfo.vue'),
+        import ('@/views/center/BindInfo.vue'),
       meta: {
         title: '信息绑定'
       }
