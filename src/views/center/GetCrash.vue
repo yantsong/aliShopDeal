@@ -5,13 +5,13 @@
          <p>提现到银行卡 <span>{{data.card_bank}}({{data.card_no}})</span></p>
          <p>提现金额</p>
             <div class="money">
-                <em>￥</em> <input type="text">
+                <em>￥</em> <input type="text" v-model="form.amount">
             </div>
             <div class="overage">
-                当前余额xx元 <span>全部提现</span>
+                当前余额{{data.balance}}元 <span @click="form.amount = data.balance">全部提现</span>
             </div>
      </section>
-     <div btsb> 提现</div>
+     <div btsb @click="docrash"> 提现</div>
  </div>
 </template>
 
@@ -20,7 +20,10 @@ import api from "@/api/center";
 export default {
   data() {
     return {
-      data: {}
+      data: {},
+      form: {
+        amount: ""
+      }
     };
   },
 
@@ -34,7 +37,15 @@ export default {
 
   mounted() {},
 
-  methods: {},
+  methods: {
+    docrash() {
+      api.doCarsh(this.form).then(res => {
+        if (res.data.success) {
+          this.$toast("提现成功!请注意查收");
+        }
+      });
+    }
+  },
 
   computed: {},
 

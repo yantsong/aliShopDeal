@@ -11,5 +11,6 @@ export default {
   bindQQ: (params) => fetch.get(`updateQQ`, {
     params
   }),
-  bindBankCard: (params) => fetch.post(`bindBankCard`, qs.stringify(params))
+  bindBankCard: (params) => fetch.post(`bindBankCard`, qs.stringify(params)),
+  doCarsh: (params) => fetch.post(`withdraw`, qs.stringify(params))
 }

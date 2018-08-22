@@ -21,7 +21,7 @@
          </div>
          <div class="myintegral">
              <p>我的积分:{{info.amount}}</p>
-             <span bts>提现</span>
+             <span bts @click="_getCrash">提现</span>
          </div>
      </div>
      <ul class="index-tab-list">
@@ -109,6 +109,9 @@ export default {
           this.data = res.data.message;
         }
       });
+    },
+    _getCrash() {
+      this.$router.push("/getCrash");
     }
   }
 };

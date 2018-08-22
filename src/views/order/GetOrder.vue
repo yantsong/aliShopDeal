@@ -7,7 +7,7 @@
          <span>00:</span>
          <span>{{ minute }}:</span>
          <span>{{second}}</span>
-         <em bts>放弃任务</em>
+         <em bts @click="_cancel">放弃任务</em>
      </section>
      <section class="getorder-thumb" bsd>
          <img src="@/assets/avt.png" alt="">
@@ -65,7 +65,8 @@ export default {
         "已确认下单金额以及下单要求符合任务要求",
         "我会在1小时内付款并提交任务,防止任务呗释放"
       ],
-      time: 60 * 15
+      time: 60 * 15,
+      data: {}
     };
   },
 
@@ -86,6 +87,10 @@ export default {
     _submit() {
       let id = this.$route.params.id;
       this.$router.push(`/submitOrder/${id}`);
+    },
+    _cancel() {
+      let id = this.$route.params.id;
+      this.$router.push(`/orderCancel/${id}`);
     }
   },
   watch: {
