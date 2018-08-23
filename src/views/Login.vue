@@ -18,8 +18,8 @@
      <div class="login-button" @click="_login" bts>
        登录
      </div>
-     <div class="login-fast">
-         快速登录
+     <div class="login-fast" @click="_register">
+         立即注册
      </div>
  </div>
 </template>
@@ -48,6 +48,9 @@ export default {
           this.$router.push("/");
         }
       });
+    },
+    _register() {
+      this.$router.push("/register");
     }
   },
 

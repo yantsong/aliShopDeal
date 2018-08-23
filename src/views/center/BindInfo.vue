@@ -5,7 +5,7 @@
          <li><span>旺旺号</span><em>{{data.ww}}</em></li>
          <li><span>手机号</span><em>{{data.phone}}</em></li>
          <li @click="bindCard(data.card)"><span>绑定银行卡</span><i class='iconfont icon-toright'></i></li>
-         <li><span>身份证号</span><i class='iconfont icon-toright'></i></li>
+         <li @click="IDCard(data.id)"><span>身份证号</span><i class='iconfont icon-toright'></i></li>
          <li @click="changeQQ(data.qq, 'QQ')"><span>QQ</span><i class='iconfont icon-toright'></i></li>
          <li @click="changeWe(data.we_chat, '微信')"><span>微信</span><i class='iconfont icon-toright'></i></li>
      </ul>
@@ -38,6 +38,9 @@ export default {
     },
     bindCard(id) {
       this.$router.push(`/bindcard?id=${id}`);
+    },
+    IDCard() {
+      this.$router.push(`/idcard`);
     }
   },
 

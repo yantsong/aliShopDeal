@@ -41,13 +41,13 @@
        </p>
        <em>></em>
      </li>
-     <li>
-       <router-link tag="p" to="/bindinfo">
-         <i class='iconfont icon-about' style="color:#ffcc33"></i>
+       <router-link tag="li" to="/bindinfo">
+       <p>
+ <i class='iconfont icon-about' style="color:#ffcc33"></i>
          <span>信息绑定</span>
-       </router-link >
+       </p>
        <em>></em>
-     </li>
+       </router-link >
    </ul>
  </div>
 </template>

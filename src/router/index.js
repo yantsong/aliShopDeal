@@ -189,6 +189,14 @@ let router = new Router({
       meta: {
         title: '提现'
       }
+    }, {
+      path: '/idcard',
+      name: 'IDCard',
+      component: () =>
+        import ('@/views/center/IDCard.vue'),
+      meta: {
+        title: '实名认证'
+      }
     },
     {
       path: '/apprenticesList',
