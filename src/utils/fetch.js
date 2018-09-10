@@ -18,6 +18,7 @@ instance.interceptors.request.use(
 )
 instance.interceptors.response.use(
   res => {
+    console.log(res)
     // eslint-disable-next-line
     if (res.data.message == '登陆凭证已失效，请重新登录！') {
       console.log(res.data.message);
@@ -31,7 +32,7 @@ instance.interceptors.response.use(
     return res
   },
   err => {
-    console.log(err);
+    Toast('网络出错!')
     return err
   }
 )
