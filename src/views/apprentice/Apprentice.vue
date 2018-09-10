@@ -18,7 +18,7 @@
    <ul class="apprentice-count" invite bsd fc>
      <li>
        <p>{{info&&info.invite_code}}</p>
-       <span>复制</span>
+       <span class="cpbtn" :data-clipboard-text="info.invite_code">复制</span>
      </li>
      <li>
        <p @click="makeCode">生成邀请码</p>
@@ -40,6 +40,8 @@
 
 <script>
 import api from "@/api/apprentice";
+// import Clipboard from "clipboard";
+
 export default {
   data() {
     return {
@@ -53,7 +55,15 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() {
+    // let clp = new Clipboard(".cpbtn", {
+    //   container: document.getElementById("btn")
+    // });
+    // clp.on("success", e => {
+    //   console.log("object");
+    //   console.log(e.text);
+    // });
+  },
 
   methods: {
     makeCode() {

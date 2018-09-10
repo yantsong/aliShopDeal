@@ -9,7 +9,7 @@
                   <dt>{{item.invite_code}} <em v-if="!item.status">(未使用)</em> <em v-else class="color-style"> （已使用）</em></dt>
                   <dd class="time">{{item.create_time}}</dd>
                </dl>
-             <span class="history-code-word" bts @click="doCopy">复制</span>
+             <span class="cpbtn history-code-word" bts :data-clipboard-text="item.invite_code">复制</span>
              </div>
          </li>
      </ul>

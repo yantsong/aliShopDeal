@@ -22,8 +22,8 @@
      </section>
      <section class="getorder-list" bsd>
          <div>
-             <input type="text" placeholder="请粘贴分享淘口令或商品链接">
-             <em bts>点击核对</em>
+             <input type="text" placeholder="搜索关键字" v-model="keywords">
+             <em bts :data-clipboard-text="keywords">点击复制</em>
         </div>
          <ul>
              <li><span>拍下单价</span><em>{{data.goods_price}}元</em></li>
@@ -66,7 +66,8 @@ export default {
         "我会在1小时内付款并提交任务,防止任务呗释放"
       ],
       time: 60 * 15,
-      data: {}
+      data: {},
+      keywords: ""
     };
   },
 

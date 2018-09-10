@@ -20,7 +20,7 @@
          </li>
          <li>
            <em>邀请码</em>
-           <p>您是xxx的邀请注册的用户</p>
+           <input type="text" placeholder="输入师傅给你的邀请码" v-model="form.invite_code">
          </li>
          <li>
            <em>设置登录密码</em>
@@ -38,15 +38,15 @@
      <div class="register-step2" v-if="step == 2">
         <section lr-is>
             <input type="text" placeholder=" 淘口令" v-model="taoCode">
-            <span bts>复制淘口令</span>
+            <span class="cpbtn" bts :data-clipboard-text="taoCode">复制淘口令</span>
         </section>
         <div>1.请复制上方的淘口令,并打开手机淘宝</div>
         <div>2.拍下宝贝,不要付款</div>
-         <section lr-is>
-            <input type="text" placeholder="订单号">
-            <span bts>粘贴</span>
-        </section>
         <div>3.粘贴已拍下的订单号</div>
+         <section lr-is>
+            <input type="text" placeholder="在此粘贴订单号">
+            <!-- <span bts>粘贴</span> -->
+        </section>
         <p class="btn" @click="_commitOrder" bts> 确认并绑定</p>
         <p>审核人员会根据您拍下的淘宝号自动绑定该账号哦</p>
      </div>
@@ -86,7 +86,7 @@ export default {
 
   mounted() {
     this._getTaoCode();
-    this._getInviteCode();
+    // this._getInviteCode();
   },
 
   methods: {

@@ -26,7 +26,7 @@
        <div class="line"></div>
        <div class="task-thumb-detail-id">
          <p>任务号:{{data.jhrw_id}}</p>
-         <span bts v-if="!status">复制</span>
+         <span class="cpbtn" bts v-if="!status" :data-clipboard-text="data.jhrw_id">复制</span>
          <span bts v-else @click.stop="takeOrder(data.jhrw_id)">点击接单</span>
        </div>
        <div class="task-thumb-detail-cptime" v-if="data.status == 2">

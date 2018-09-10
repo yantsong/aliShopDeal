@@ -20,7 +20,11 @@ Vue.use(NoticeBar);
 // from 'element-ui'
 import './style/index.scss'
 Vue.config.productionTip = false
-
+import clipboard from 'clipboard'
+let clp = new clipboard('.cpbtn')
+clp.on('success', (e) => {
+  console.log(e.text);
+})
 fastclick.attach(document.body)
 /* eslint-disable no-new */
 new Vue({
